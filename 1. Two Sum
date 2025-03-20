@@ -1,0 +1,8 @@
+class Solution:
+    def twoSum(self, a: List[int], ta: int) -> List[int]:
+        n = len (a)
+        d={}
+        for i in range (n):
+            if ta-a[i] in d:
+                return([i,d[ta-a[i]]])
+            d[a[i]]=i
