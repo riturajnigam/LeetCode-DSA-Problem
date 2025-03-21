@@ -33,7 +33,6 @@ public:
 
         ListNode* result = dummyHead->next;
         delete dummyHead;
-        return result;
-        
+        return result;  
     }
 };
