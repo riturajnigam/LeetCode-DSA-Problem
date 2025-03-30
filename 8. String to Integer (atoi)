@@ -1,0 +1,38 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        dfa = {
+            1: {"space":1, "sign":2, "dig":3},
+            2: {"dig":3},
+            3: {"dig":3}
+        }
+        state = 1
+        sign = "+"
+        num = 0
+        for i, char in enumerate(s):
+            if char == " ":
+                group = "space"
+            elif char in ["+","-"]:
+                group = "sign"
+            elif char.isdigit():
+                group = "dig"
+            else:
+                break
+            if group not in dfa[state]:
+                break
+            state = dfa[state][group]
+            if group == "dig":
+                num = num*10 + int(char)
+            if group == "sign":
+                sign = char
+        
+        def postprocess(n, signs):
+            if signs == "-":
+                n = -1 * n
+            lo, hi = -1 * (2**31), (2**31) - 1
+            if n <= lo:
+                return lo
+            elif n >= hi:
+                return hi
+            return n
+        
+        return postprocess(num, sign)      
